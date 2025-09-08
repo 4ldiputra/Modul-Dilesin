@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Pemrograman Dasar C++</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .navigation {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .nav-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-item:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        p, li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            position: relative;
+            border-left: 4px solid #3498db;
+            white-space: pre;
+            line-height: 1.5;
+            font-size: 14px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block::before {
+            content: "C++";
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: #3498db;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .code-block:hover {
+            background: #34495e;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .example-box {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .exercise-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .exercise-box h4 {
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .progress-bar {
+            background: #ecf0f1;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Modul Pemrograman Dasar C++</h1>
+            <p class="subtitle">Panduan Lengkap Belajar C++ dari Dasar hingga Mahir</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p id="progressText">Progress: 0% (0/11)</p>
+        </header>
+
+        <nav class="navigation">
+            <div class="nav-grid">
+                <button class="nav-item active" onclick="showSection('pengenalan')">1. Pengenalan C++</button>
+                <button class="nav-item" onclick="showSection('variabel')">2. Variabel & Tipe Data</button>
+                <button class="nav-item" onclick="showSection('operator')">3. Operator</button>
+                <button class="nav-item" onclick="showSection('percabangan')">4. Percabangan</button>
+                <button class="nav-item" onclick="showSection('perulangan')">5. Perulangan</button>
+                <button class="nav-item" onclick="showSection('array')">6. Array & String</button>
+                <button class="nav-item" onclick="showSection('struct')">7. Struktur (Struct)</button>
+                <button class="nav-item" onclick="showSection('enum')">8. Enumerasi (Enum)</button>
+                <button class="nav-item" onclick="showSection('fungsi')">9. Fungsi & Prosedur</button>
+                <button class="nav-item" onclick="showSection('algoritma')">10. Sorting & Searching</button>
+                <button class="nav-item" onclick="showSection('proyek')">11. Proyek Akhir</button>
+            </div>
+        </nav>
+
+        <main class="content">
+            <!-- Section 1: Pengenalan C++ -->
+            <section id="pengenalan" class="section active">
+                <h2>1. Pengenalan C++</h2>
+                
+                <h3>1.1 Definisi dan Sejarah</h3>
+                
+                <div class="highlight">
+                    <h4>Apa Itu Bahasa Pemrograman C++?</h4>
+                    <p>C++ adalah bahasa pemrograman tingkat tinggi yang dikembangkan oleh Bjarne Stroustrup pada awal tahun 1980-an di Bell Laboratories. C++ adalah pengembangan dari bahasa pemrograman C, dengan tambahan fitur-fitur baru seperti paradigma pemrograman berorientasi objek (OOP).</p>
+                </div>
+
+                <h4>Keunggulan C++:</h4>
+                <ul>
+                    <li>Fleksibilitas yang tinggi</li>
+                    <li>Kemampuan menghasilkan kode yang efisien</li>
+                    <li>Dukungan untuk pengembangan sistem operasi, game, dan aplikasi embedded</li>
+                    <li>Paradigma pemrograman berorientasi objek</li>
+                </ul>
+
+                <h4>Sejarah dan Evolusi C++</h4>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th>Tahun</th>
+                            <th>Versi</th>
+                            <th>Fitur Utama</th>
+                        </tr>
+                        <tr>
+                            <td>1983</td>
+                            <td>C++ Awal</td>
+                            <td>Ekstensi dari bahasa C</td>
+                        </tr>
+                        <tr>
+                            <td>1998</td>
+                            <td>C++98/C++03</td>
+                            <td>Standardisasi ISO pertama</td>
+                        </tr>
+                        <tr>
+                            <td>2011</td>
+                            <td>C++11</td>
+                            <td>Manajemen memori, fitur OOP, pemrograman generik</td>
+                        </tr>
+                        <tr>
+                            <td>2020</td>
+                            <td>C++20</td>
+                            <td>Modul, konsep pemrograman fungsional</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>1.2 Instalasi dan Pengaturan Lingkungan Pengembangan</h3>
+                
+                <h4>Cara Menginstal Compiler C++</h4>
+                
+                <div class="example-box">
+                    <h4>1. Linux (Ubuntu/Debian)</h4>
+                    <div class="code-block">
+sudo apt-get update
+sudo apt-get install g++
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>2. MacOS dengan Homebrew</h4>
+                    <div class="code-block">
+brew install gcc
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>3. Windows - Visual Studio</h4>
+                    <p>Unduh Visual Studio Community dari situs resmi Microsoft dan pilih komponen "Desktop development with C++"</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>4. Windows - MinGW dengan MSYS2</h4>
+                    <div class="code-block">
+pacman -Syu
+pacman -S mingw-w64-x86_64-toolchain
+                    </div>
+                </div>
+
+                <h4>Program Hello World Pertama</h4>
+                <div class="code-block">
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}
+                </div>
+
+                <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Instal Compiler C++ dan jalankan program Hello World</li>
+                        <li>Modifikasi program untuk mencetak pesan lain</li>
+                        <li><strong>SOAL:</strong> Buatlah program untuk mencetak informasi biodata diri</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 2: Variabel dan Tipe Data -->
+            <section id="variabel" class="section">
+                <h2>2. Variabel dan Tipe Data</h2>
+                
+                <h3>2.1 Pengenalan Variabel</h3>
+                
+                <div class="highlight">
+                    <p><strong>Variabel</strong> adalah suatu lokasi di memori yang diberi nama dan digunakan untuk menyimpan data. Variabel memiliki tipe data yang menentukan jenis data yang dapat disimpan di dalamnya.</p>
+                </div>
+
+                <h4>Deklarasi Variabel</h4>
+                <div class="code-block">
+int angka;          // Deklarasi
+double pi;          // Deklarasi
+                </div>
+
+                <h4>Inisialisasi Variabel</h4>
+                <div class="code-block">
+int angka = 10;         // Inisialisasi saat deklarasi
+double pi = 3.14159;    // Inisialisasi saat deklarasi
+
+// Inisialisasi terpisah
+int x;
+x = 20;
+                </div>
+
+                <h3>2.2 Tipe Data Dasar</h3>
+
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th>Tipe Data</th>
+                            <th>Kegunaan</th>
+                            <th>Contoh</th>
+                        </tr>
+                        <tr>
+                            <td>int</td>
+                            <td>Bilangan bulat</td>
+                            <td>10, -5, 0</td>
+                        </tr>
+                        <tr>
+                            <td>float</td>
+                            <td>Bilangan desimal (presisi rendah)</td>
+                            <td>3.14f</td>
+                        </tr>
+                        <tr>
+                            <td>double</td>
+                            <td>Bilangan desimal (presisi ganda)</td>
+                            <td>3.14159</td>
+                        </tr>
+                        <tr>
+                            <td>char</td>
+                            <td>Karakter tunggal</td>
+                            <td>'A', 'L'</td>
+                        </tr>
+                        <tr>
+                            <td>bool</td>
+                            <td>Nilai kebenaran</td>
+                            <td>true, false</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Contoh Penggunaan Variabel dan Tipe Data</h4>
+                <div class="code-block">
+#include <iostream>
+
+int main() {
+    // Tipe data berbagai jenis
+    int umur = 25;
+    float nilaiFloat = 3.14f;
+    double tinggi = 175.5;
+    char jenisKelamin = 'L';
+    bool isSunny = true;
+
+    // Menampilkan nilai variabel
+    std::cout << "Umur: " << umur << std::endl;
+    std::cout << "Nilai Float: " << nilaiFloat << std::endl;
+    std::cout << "Tinggi: " << tinggi << std::endl;
+    std::cout << "Jenis Kelamin: " << jenisKelamin << std::endl;
+    std::cout << "Cuaca Cerah? " << std::boolalpha << isSunny << std::endl;
+
+    return 0;
+}
+                </div>
+            </section>
+
+            <!-- Section 3: Operator -->
+            <section id="operator" class="section">
+                <h2>3. Operator</h2>
+
+                <h3>3.1 Operator Aritmatika</h3>
+
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Nama</th>
+                            <th>Contoh</th>
+                            <th>Hasil</th>
+                        </tr>
+                        <tr>
+                            <td>+</td>
+                            <td>Penjumlahan</td>
+                            <td>5 + 3</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>Pengurangan</td>
+                            <td>5 - 3</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>*</td>
+                            <td>Perkalian</td>
+                            <td>5 * 3</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>/</td>
+                            <td>Pembagian</td>
+                            <td>10 / 2</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>%</td>
+                            <td>Modulo (sisa bagi)</td>
+                            <td>8 % 3</td>
+                            <td>2</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>3.2 Operator Perbandingan dan Logika</h3>
+
+                <h4>Operator Perbandingan</h4>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Nama</th>
+                            <th>Contoh</th>
+                        </tr>
+                        <tr>
+                            <td>==</td>
+                            <td>Sama dengan</td>
+                            <td>a == b</td>
+                        </tr>
+                        <tr>
+                            <td>!=</td>
+                            <td>Tidak sama dengan</td>
+                            <td>a != b</td>
+                        </tr>
+                        <tr>
+                            <td><</td>
+                            <td>Kurang dari</td>
+                            <td>a < b</td>
+                        </tr>
+                        <tr>
+                            <td>></td>
+                            <td>Lebih besar dari</td>
+                            <td>a > b</td>
+                        </tr>
+                        <tr>
+                            <td><=</td>
+                            <td>Kurang dari atau sama dengan</td>
+                            <td>a <= b</td>
+                        </tr>
+                        <tr>
+                            <td>>=</td>
+                            <td>Lebih besar atau sama dengan</td>
+                            <td>a >= b</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Operator Logika</h4>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Nama</th>
+                            <th>Hasil</th>
+                        </tr>
+                        <tr>
+                            <td>&&</td>
+                            <td>AND</td>
+                            <td>true jika kedua kondisi true</td>
+                        </tr>
+                        <tr>
+                            <td>||</td>
+                            <td>OR</td>
+                            <td>true jika salah satu kondisi true</td>
+                        </tr>
+                        <tr>
+                            <td>!</td>
+                            <td>NOT</td>
+                            <td>Membalikkan nilai kebenaran</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Contoh Program Kalkulator Sederhana</h4>
+                <div class="code-block">
+#include <iostream>
+
+int main() {
+    double num1, num2;
+    
+    // Input
+    std::cout << "Enter first number: ";
+    std::cin >> num1;
+    std::cout << "Enter second number: ";
+    std::cin >> num2;
+    
+    // Operasi Aritmatika
+    double sum = num1 + num2;
+    double difference = num1 - num2;
+    double product = num1 * num2;
+    double quotient = num1 / num2;
+    
+    // Output
+    std::cout << "Sum: " << sum << std::endl;
+    std::cout << "Difference: " << difference << std::endl;
+    std::cout << "Product: " << product << std::endl;
+    std::cout << "Quotient: " << quotient << std::endl;
+    
+    return 0;
+}
+                </div>
+
+                <div class="exercise-box">
+                    <h4>Latihan</h4>
+                    <ul>
+                        <li>Buat program sederhana yang menggunakan operator-operator tersebut</li>
+                        <li>Implementasikan operator logika dalam program kontrol aliran</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 4: Percabangan -->
+            <section id="percabangan" class="section">
+                <h2>4. Percabangan</h2>
+
+                <h3>4.1 IF, ELSE IF, ELSE</h3>
+                
+                <div class="highlight">
+                    <p>Percabangan digunakan untuk membuat keputusan dalam program berdasarkan kondisi tertentu.</p>
+                </div>
+
+                <h4>Struktur Dasar Percabangan</h4>
+                <div class="code-block">
+if (kondisi) {
+    // Kode yang dijalankan jika kondisi true
+} else if (kondisi_lain) {
+    // Kode yang dijalankan jika kondisi_lain true
+} else {
+    // Kode yang dijalankan jika semua kondisi false
+}
+                </div>
+
+                <h4>Contoh Program Percabangan</h4>
+                <div class="code-block">
+#include <iostream>
+
+int main() {
+    int num;
+    
+    std::cout << "Enter a number: ";
+    std::cin >> num;
+    
+    if (num > 0) {
+        std::cout << "The number is positive." << std::endl;
+    } else if (num < 0) {
+        std::cout << "The number is negative." << std::endl;
+    } else {
+        std::cout << "The number is zero." << std::endl;
+    }
+    
+    return 0;
+}
+                </div>
+
+                <h3>4.2 Switch Case</h3>
+                
+                <p>Switch case digunakan untuk percabangan multi-kondisi yang lebih efisien daripada if-else bertingkat.</p>
+
+                <div class="code-block">
+#include <iostream>
+
+int main() {
+    int pilihan;
+    
+    std::cout << "Pilih menu (1-3): ";
+    std::cin >> pilihan;
+    
+    switch (pilihan) {
+        case 1:
+            std::cout << "Anda memilih menu 1" << std::endl;
+            break;
+        case 2:
+            std::cout << "Anda memilih menu 2" << std::endl;
+            break;
+        case 3:
+            std::cout << "Anda memilih menu 3" << std::endl;
+            break;
+        default:
+            std::cout << "Pilihan tidak valid" << std::endl;
+    }
+    
+    return 0;
+}
+                </div>
+
+                <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Implementasikan beberapa percabangan dalam program</li>
+                        <li>Buat program penilaian sederhana dengan menggunakan percabangan if-else</li>
+                        <li><strong>SOAL:</strong> Buatlah program yang menentukan grade berdasarkan nilai (A: 90-100, B: 80-89, C: 70-79, D: 60-69, E: <60)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 5: Perulangan -->
+            <section id="perulangan" class="section">
+                <h2>5. Perulangan</h2>
+
+                <h3>5.1 For Loop</h3>
+                
+                <div class="highlight">
+                    <p>For loop digunakan untuk iterasi dengan jumlah perulangan yang sudah diketahui.</p>
+                </div>
+
+                <div class="code-block">
+for (inisialisasi; kondisi; increment/decrement) {
+    // Kode yang akan diulang
+}
+                </div>
+
+                <h4>Contoh For Loop</h4>
+                <div class="code-block">
+// Mencetak angka 1-5
+for (int i = 1; i <= 5; ++i) {
+    std::cout << i << " ";
+}
+std::cout << std::endl;
+                </div>
+
+                <h3>5.2 While dan Do-While Loop</h3>
+
+                <h4>While Loop</h4>
+                <div class="code-block">
+int j = 1;
+while (j <= 5) {
+    std::cout << j << " ";
+    ++j;
+}
+                </div>
+
+                <h4>Do-While Loop</h4>
+                <div class="code-block">
+int k = 1;
+do {
+    std::cout << k << " ";
+    ++k;
+} while (k <= 5);
+                </div>
+
+                <h4>Contoh Program Lengkap</h4>
+                <div class="code-block">
+#include <iostream>
+
+int main() {
+    // For Loop
+    std::cout << "For Loop: ";
+    for (int i = 1; i <= 5; ++i) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+
+    // While Loop
+    std::cout << "While Loop: ";
+    int j = 1;
+    while (j <= 5) {
+        std::cout << j << " ";
+        ++j;
+    }
+    std::cout << std::endl;
+
+    // Do-While Loop
+    std::cout << "Do-While Loop: ";
+    int k = 1;
+    do {
+        std::cout << k << " ";
+        ++k;
+    } while (k <= 5);
+    std::cout << std::endl;
+
+    return 0;
+}
+                </div>
+
+                <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Buat program yang menggunakan berbagai jenis perulangan</li>
+                        <li>Implementasikan perulangan untuk membuat pola bintang sederhana</li>
+                        <li><strong>SOAL:</strong> Buatlah program yang meminta pengguna memasukkan bilangan bulat positif N, lalu tampilkan semua bilangan ganjil dari 1 hingga N</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 6: Array & String -->
+            <section id="array" class="section">
+                <h2>6. Array & String</h2>
+
+                <h3>6.1 Array</h3>
+                
+                <div class="highlight">
+                    <p><strong>Array</strong> adalah struktur data yang digunakan untuk menyimpan kumpulan elemen dengan tipe data yang sama dalam lokasi memori yang berdekatan.</p>
+                </div>
+
+                <h4>Deklarasi dan Inisialisasi Array</h4>
+                <div class="code-block">
+// Deklarasi array
+int numbers[5];
+
+// Inisialisasi saat deklarasi
+int numbers[5] = {1, 2, 3, 4, 5};
+
+// Inisialisasi sebagian
+int numbers[5] = {1, 2}; // sisanya akan diisi 0
+                </div>
+
+                <h4>Mengakses Elemen Array</h4>
+                <div class="code-block">
+int numbers[5] = {10, 20, 30, 40, 50};
+
+// Mengakses elemen (indeks dimulai dari 0)
+std::cout << numbers[0] << std::endl; // Output: 10
+std::cout << numbers[4] << std::endl; // Output: 50
+
+// Mengubah nilai elemen
+numbers[2] = 35;
+                </div>
+
+                <h3>6.2 String</h3>
+
+                <p>String adalah kumpulan karakter yang digunakan untuk menyimpan teks.</p>
+
+                <h4>Deklarasi dan Inisialisasi String</h4>
+                <div class="code-block">
+#include <string>
+
+// Menggunakan std::string
+std::string greeting = "Hello, World!";
+std::string name;
+name = "John Doe";
+
+// String kosong
+std::string empty = "";
+                </div>
+
+                <h4>Operasi Dasar pada String</h4>
+                <div class="code-block">
+std::string firstName = "John";
+std::string lastName = "Doe";
+
+// Concatenation (penggabungan)
+std::string fullName = firstName + " " + lastName;
+
+// Panjang string
+int length = fullName.length();
+
+// Mengakses karakter
+char firstChar = fullName[0]; // 'J'
+                </div>
+
+                <h4>Contoh Program Array dan String</h4>
+                <div class="code-block">
+#include <iostream>
+#include <string>
+
+int main() {
+    // Array
+    int numbers[5] = {1, 2, 3, 4, 5};
+    
+    std::cout << "Array elements: ";
+    for (int i = 0; i < 5; ++i) {
+        std::cout << numbers[i] << " ";
+    }
+    std::cout << std::endl;
+    
+    // String
+    std::string greeting = "Hello, World!";
+    std::cout << "String: " << greeting << std::endl;
+    std::cout << "Length: " << greeting.length() << std::endl;
+    
+    return 0;
+}
+                </div>
+
+                <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Buat program yang menggunakan array dan string</li>
+                        <li>Implementasikan program untuk mencari nilai maksimum dalam array</li>
+                        <li><strong>SOAL:</strong> Buatlah program yang mengambil 5 nilai integer dari pengguna, menyimpannya dalam array, dan kemudian menampilkan nilai maksimum dari array tersebut</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 7: Struktur (Struct) -->
+            <section id="struct" class="section">
+                <h2>7. Struktur (Struct)</h2>
+
+                <h3>7.1 Definisi dan Penggunaan</h3>
+                
+                <div class="highlight">
+                    <p><strong>Struktur</strong> adalah tipe data terdefinisi pengguna yang digunakan untuk menggabungkan beberapa tipe data dasar menjadi satu unit.</p>
+                </div>
+
+                <h4>Membuat Struktur Data Sederhana</h4>
+                <div class="code-block">
+struct Person {
+    std::string name;
+    int age;
+    double height;
+};
+                </div>
+
+                <h4>Menggunakan Struktur</h4>
+                <div class="code-block">
+// Membuat variabel struct
+Person person1;
+
+// Mengisi nilai anggota struktur
+person1.name = "John Doe";
+person1.age = 25;
+person1.height = 175.5;
+
+// Inisialisasi langsung
+Person person2 = {"Jane Smith", 30, 165.0};
+                </div>
+
+                <h4>Contoh Program Lengkap</h4>
+                <div class="code-block">
+#include <iostream>
+#include <string>
+
+// Definisi struktur
+struct Student {
+    std::string name;
+    int nim;
+    double gpa;
+};
+
+// Fungsi untuk menampilkan data mahasiswa
+void displayStudent(const Student& student) {
+    std::cout << "Name: " << student.name << std::endl;
+    std::cout << "NIM: " << student.nim << std::endl;
+    std::cout << "GPA: " << student.gpa << std::endl;
+    std::cout << "-------------------" << std::endl;
+}
+
+int main() {
+    // Membuat array of struct
+    Student students[3] = {
+        {"Alice Johnson", 123456, 3.85},
+        {"Bob Smith", 234567, 3.70},
+        {"Carol Brown", 345678, 3.92}
+    };
+    
+    // Menampilkan data semua mahasiswa
+    std::cout << "Data Mahasiswa:" << std::endl;
+    for (int i = 0; i < 3; i++) {
+        displayStudent(students[i]);
+    }
+    
+    return 0;
+}
+                </div>
+
+                <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Implementasikan struct dalam program</li>
+                        <li>Buat program manajemen data mahasiswa dengan menggunakan struktur</li>
+                        <li><strong>SOAL:</strong> Buatlah struct untuk menyimpan data buku (judul, pengarang, tahun terbit, harga) dan buat program untuk mengelola data perpustakaan</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 8: Enumerasi (Enum) -->
+            <section id="enum" class="section">
+                <h2>8. Enumerasi (Enum)</h2>
+
+                <h3>8.1 Pengertian Enum</h3>
+                
+                <div class="highlight">
+                    <p><strong>Enumerasi</strong> adalah tipe data terdefinisi pengguna yang digunakan untuk mewakili daftar nilai yang terbatas dan bernama.</p>
+                </div>
+
+                <h4>Definisi Enum</h4>
+                <div class="code-block">
+// Enum untuk hari dalam seminggu
+enum Days { 
+    Sunday, Monday, Tuesday, Wednesday, 
+    Thursday, Friday, Saturday 
+};
+
+// Enum dengan nilai eksplisit
+enum Status { 
+    PENDING = 1, 
+    PROCESSING = 2, 
+    COMPLETED = 3 
+};
+                </div>
+
+                <h4>Menggunakan Enum</h4>
+                <div class="code-block">
+Days today = Wednesday;
+Status orderStatus = PENDING;
+
+// Menggunakan dalam switch case
+switch (today) {
+    case Monday:
+        std::cout << "Start of work week" << std::endl;
+        break;
+    case Friday:
+        std::cout << "TGIF!" << std::endl;
+        break;
+    case Saturday:
+    case Sunday:
+        std::cout << "Weekend!" << std::endl;
+        break;
+    default:
+        std::cout << "Regular day" << std::endl;
+}
+                </div>
+
+                <h4>Contoh Program Klasifikasi Hari</h4>
+                <div class="code-block">
+#include <iostream>
+
+enum Days { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
+
+int main() {
+    int dayNumber;
+    
+    std::cout << "Enter a number for the day (0-6): ";
+    std::cin >> dayNumber;
+    
+    if (dayNumber < 0 || dayNumber > 6) {
+        std::cout << "Invalid day number!" << std::endl;
+        return 1;
+    }
+    
+    Days day = static_cast<Days>(dayNumber);
+    
+    switch (day) {
+        case Sunday:
+        case Saturday:
+            std::cout << "It's a weekend day!" << std::endl;
+            break;
+        case Monday:
+        case Tuesday:
+        case Wednesday:
+        case Thursday:
+        case Friday:
+            std::cout << "It's a weekday." << std::endl;
+            break;
+    }
+    
+    return 0;
+}
+                </div>
+
+                <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Gunakan enum dalam program</li>
+                        <li>Buat program untuk mengklasifikasikan hari dalam seminggu menggunakan enum</li>
+                        <li><strong>SOAL:</strong> Buatlah enum untuk grade (A, B, C, D, E) dan program yang mengkonversi nilai numerik ke grade</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 9: Fungsi & Prosedur -->
+            <section id="fungsi" class="section">
+                <h2>9. Fungsi & Prosedur</h2>
+
+                <h3>9.1 Fungsi</h3>
+                
+                <div class="highlight">
+                    <p><strong>Fungsi</strong> adalah blok kode yang dapat digunakan kembali dan mengembalikan nilai. <strong>Prosedur</strong> adalah blok kode yang tidak mengembalikan nilai (void).</p>
+                </div>
+
+                <h4>Definisi Fungsi</h4>
+                <div class="code-block">
+// Fungsi dengan parameter dan nilai kembalian
+int add(int a, int b) {
+    return a + b;
+}
+
+// Fungsi tanpa parameter
+int getRandomNumber() {
+    return 42;
+}
+
+// Fungsi dengan multiple parameter
+double calculateArea(double length, double width) {
+    return length * width;
+}
+                </div>
+
+                <h3>9.2 Prosedur</h3>
+
+                <h4>Definisi Prosedur (Void Function)</h4>
+                <div class="code-block">
+// Prosedur tanpa nilai kembalian
+void greet(std::string name) {
+    std::cout << "Hello, " << name << "!" << std::endl;
+}
+
+// Prosedur tanpa parameter
+void printMenu() {
+    std::cout << "=== MENU ===" << std::endl;
+    std::cout << "1. Option 1" << std::endl;
+    std::cout << "2. Option 2" << std::endl;
+    std::cout << "3. Exit" << std::endl;
+}
+                </div>
+
+                <h4>Contoh Program Lengkap</h4>
+                <div class="code-block">
+#include <iostream>
+#include <cmath>
+
+// Fungsi untuk menghitung luas lingkaran
+double calculateCircleArea(double radius) {
+    return M_PI * radius * radius;
+}
+
+// Fungsi untuk menghitung keliling lingkaran
+double calculateCirclePerimeter(double radius) {
+    return 2 * M_PI * radius;
+}
+
+// Prosedur untuk menampilkan hasil
+void displayResults(double radius, double area, double perimeter) {
+    std::cout << "=== HASIL PERHITUNGAN ===" << std::endl;
+    std::cout << "Radius: " << radius << std::endl;
+    std::cout << "Area: " << area << std::endl;
+    std::cout << "Perimeter: " << perimeter << std::endl;
+}
+
+int main() {
+    double radius;
+    
+    std::cout << "Masukkan radius lingkaran: ";
+    std::cin >> radius;
+    
+    // Memanggil fungsi
+    double area = calculateCircleArea(radius);
+    double perimeter = calculateCirclePerimeter(radius);
+    
+    // Memanggil prosedur
+    displayResults(radius, area, perimeter);
+    
+    return 0;
+}
+                </div>
+
+                <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Implementasikan fungsi dan prosedur dalam program</li>
+                        <li>Buat program untuk menghitung luas dan keliling berbagai bangun datar menggunakan fungsi</li>
+                        <li><strong>SOAL:</strong> Buatlah program kalkulator dengan fungsi untuk setiap operasi matematika dasar</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 10: Algoritma Sorting & Searching -->
+            <section id="algoritma" class="section">
+                <h2>10. Algoritma Sorting & Searching</h2>
+
+                <h3>10.1 Algoritma Sorting</h3>
+
+                <h4>1. Bubble Sort</h4>
+                <div class="highlight">
+                    <p>Bubble Sort membandingkan elemen yang berdekatan dan menukar posisinya jika elemen pertama lebih besar dari elemen kedua.</p>
+                </div>
+
+                <div class="code-block">
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (arr[j] > arr[j+1]) {
+                // Swap elements
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+}
+                </div>
+
+                <h4>2. Selection Sort</h4>
+                <div class="code-block">
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        int minIdx = i;
+        for (int j = i+1; j < n; j++) {
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j;
+            }
+        }
+        // Swap minimum element with first element
+        int temp = arr[minIdx];
+        arr[minIdx] = arr[i];
+        arr[i] = temp;
+    }
+}
+                </div>
+
+                <h4>3. Insertion Sort</h4>
+                <div class="code-block">
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+                </div>
+
+                <h3>10.2 Algoritma Searching</h3>
+
+                <h4>1. Linear Search</h4>
+                <div class="highlight">
+                    <p>Linear Search memeriksa setiap elemen dalam array secara berurutan hingga menemukan elemen yang dicari.</p>
+                </div>
+
+                <div class="code-block">
+int linearSearch(int arr[], int n, int target) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == target) {
+            return i; // Return index if found
+        }
+    }
+    return -1; // Return -1 if not found
+}
+                </div>
+
+                <h4>2. Binary Search</h4>
+                <div class="highlight">
+                    <p>Binary Search bekerja pada array yang sudah terurut dengan membagi array menjadi dua bagian secara berulang.</p>
+                </div>
+
+                <div class="code-block">
+int binarySearch(int arr[], int low, int high, int target) {
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        
+        if (arr[mid] == target)
+            return mid;
+        else if (arr[mid] < target)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    return -1; // Element not found
+}
+                </div>
+
+                <h4>Contoh Program Lengkap</h4>
+                <div class="code-block">
+#include <iostream>
+
+// Bubble Sort implementation
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (arr[j] > arr[j+1]) {
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+}
+
+// Binary Search implementation
+int binarySearch(int arr[], int low, int high, int target) {
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        
+        if (arr[mid] == target)
+            return mid;
+        else if (arr[mid] < target)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    return -1;
+}
+
+// Function to display array
+void displayArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    std::cout << "Original array: ";
+    displayArray(arr, n);
+    
+    // Sort the array
+    bubbleSort(arr, n);
+    
+    std::cout << "Sorted array: ";
+    displayArray(arr, n);
+    
+    // Search for an element
+    int target = 25;
+    int result = binarySearch(arr, 0, n-1, target);
+    
+    if (result != -1) {
+        std::cout << "Element " << target << " found at index " << result << std::endl;
+    } else {
+        std::cout << "Element " << target << " not found" << std::endl;
+    }
+    
+    return 0;
+}
+                </div>
+
+                <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Implementasikan algoritma sorting dan searching dalam program</li>
+                        <li>Bandingkan performa algoritma sorting yang berbeda</li>
+                        <li><strong>SOAL:</strong> Buatlah program yang memungkinkan pengguna memilih algoritma sorting dan searching yang ingin digunakan</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 11: Proyek Akhir -->
+            <section id="proyek" class="section">
+                <h2>11. Proyek Akhir</h2>
+
+                <h3>Sistem Pengelolaan Inventaris</h3>
+                
+                <div class="highlight">
+                    <p><strong>Tugas:</strong> Buatlah sistem pengelolaan inventaris menggunakan pemrograman C++ dengan fitur-fitur yang telah dipelajari.</p>
+                </div>
+
+                <h4>Spesifikasi Proyek</h4>
+                <div class="example-box">
+                    <h4>Data Inventaris yang Harus Dikelola:</h4>
+                    <ul>
+                        <li>Kode inventaris</li>
+                        <li>Nama inventaris</li>
+                        <li>Jumlah inventaris</li>
+                        <li>Satuan inventaris</li>
+                        <li>Harga inventaris</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>Fungsi-fungsi yang Harus Ada:</h4>
+                    <ol>
+                        <li>Menambah data inventaris</li>
+                        <li>Menghapus data inventaris</li>
+                        <li>Mengubah data inventaris</li>
+                        <li>Menampilkan data inventaris</li>
+                        <li>Mencari data inventaris</li>
+                        <li>Mencetak data inventaris</li>
+                    </ol>
+                </div>
+
+                <div class="example-box">
+                    <h4>Fitur Tambahan:</h4>
+                    <ul>
+                        <li>Fitur Sorting menggunakan algoritma bubble sort</li>
+                        <li>Fitur Searching menggunakan algoritma sequential search</li>
+                    </ul>
+                </div>
+
+                <h4>Template Struktur Program</h4>
+                <div class="code-block">
+#include <iostream>
+#include <string>
+#include <vector>
+
+// Struktur untuk data inventaris
+struct Inventory {
+    std::string code;
+    std::string name;
+    int quantity;
+    std::string unit;
+    double price;
+};
+
+class InventoryManager {
+private:
+    std::vector<Inventory> items;
+
+public:
+    // Method declarations
+    void addItem();
+    void deleteItem();
+    void updateItem();
+    void displayItems();
+    void searchItem();
+    void sortItems();
+    void printReport();
+    void showMenu();
+    int findItemByCode(const std::string& code);
+};
+
+int main() {
+    InventoryManager manager;
+    int choice;
+    
+    do {
+        manager.showMenu();
+        std::cout << "Pilih menu: ";
+        std::cin >> choice;
+        
+        switch (choice) {
+            case 1: manager.addItem(); break;
+            case 2: manager.deleteItem(); break;
+            case 3: manager.updateItem(); break;
+            case 4: manager.displayItems(); break;
+            case 5: manager.searchItem(); break;
+            case 6: manager.sortItems(); break;
+            case 7: manager.printReport(); break;
+            case 0: std::cout << "Terima kasih!" << std::endl; break;
+            default: std::cout << "Pilihan tidak valid!" << std::endl;
+        }
+    } while (choice != 0);
+    
+    return 0;
+}
+                </div>
+
+                <div class="exercise-box">
+                    <h4>Petunjuk Pengerjaan:</h4>
+                    <ol>
+                        <li>Implementasikan semua method dalam class InventoryManager</li>
+                        <li>Gunakan struct untuk menyimpan data inventaris</li>
+                        <li>Implementasikan algoritma sorting dan searching</li>
+                        <li>Tambahkan validasi input dan error handling</li>
+                        <li>Buat menu interaktif yang user-friendly</li>
+                        <li>Dokumentasikan kode dengan komentar yang jelas</li>
+                    </ol>
+                </div>
+
+                <div class="highlight">
+                    <h4>Kriteria Penilaian:</h4>
+                    <ul>
+                        <li><strong>Fungsionalitas (40%):</strong> Semua fitur berjalan dengan benar</li>
+                        <li><strong>Algoritma (25%):</strong> Implementasi sorting dan searching</li>
+                        <li><strong>Struktur Code (20%):</strong> Penggunaan struct, function, dan class</li>
+                        <li><strong>User Interface (15%):</strong> Menu dan tampilan yang mudah digunakan</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Modul Pemrograman Dasar C++. Dibuat dengan ❤️ untuk pembelajaran.</p>
+            <p>Selamat belajar dan semoga sukses!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Kode akses rahasia
+        const ACCESS_CODE = "CPP2024SECURE";
+        
+        let completedSections = new Set();
+        const totalSections = 11;
+
+        // Fungsi untuk memeriksa kode akses
+        function checkAccess() {
+            const inputCode = document.getElementById('accessCode').value.trim();
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (inputCode === ACCESS_CODE) {
+                // Login berhasil
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                
+                // Set session
+                sessionStorage.setItem('isAuthenticated', 'true');
+                
+                // Initialize progress
+                completedSections.add('pengenalan');
+                updateProgress();
+                
+                // Show success message briefly
+                showNotification('Login berhasil! Selamat belajar!', 'success');
+            } else {
+                // Login gagal
+                errorMessage.textContent = 'Kode akses tidak valid! Silakan coba lagi.';
+                errorMessage.style.display = 'block';
+                
+                // Clear input
+                document.getElementById('accessCode').value = '';
+                document.getElementById('accessCode').focus();
+                
+                // Hide error after 3 seconds
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Fungsi logout
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin keluar?')) {
+                sessionStorage.removeItem('isAuthenticated');
+                document.getElementById('loginScreen').style.display = 'flex';
+                document.getElementById('mainContent').style.display = 'none';
+                document.getElementById('accessCode').value = '';
+                
+                showNotification('Anda telah logout', 'info');
+            }
+        }
+
+        // Fungsi untuk menampilkan notifikasi
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#27ae60' : type === 'error' ? '#e74c3c' : '#3498db'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                z-index: 10000;
+                animation: slideInRight 0.3s ease;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease forwards';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // PENTING: Pastikan halaman login muncul dulu
+        document.addEventListener('DOMContentLoaded', function() {
+            // Selalu tampilkan login screen terlebih dahulu
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('mainContent').style.display = 'none';
+            
+            // Hapus session lama (opsional - untuk memastikan selalu login)
+            // sessionStorage.removeItem('isAuthenticated');
+            
+            // Focus pada input kode
+            setTimeout(() => {
+                document.getElementById('accessCode').focus();
+            }, 500);
+        });
+
+        // Allow Enter key to submit
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') {
+                checkAccess();
+            }
+        });
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(300px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(300px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Mark section as completed
+            completedSections.add(sectionId);
+            updateProgress();
+
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const progress = (completedSections.size / totalSections) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = 
+                `Progress: ${Math.round(progress)}% (${completedSections.size}/${totalSections})`;
+        }
+
+        // Add interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add copy to clipboard functionality for code blocks
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach(block => {
+                block.addEventListener('click', function() {
+                    navigator.clipboard.writeText(this.textContent).then(() => {
+                        showNotification('Kode berhasil disalin!', 'success');
+                    });
+                });
+            });
+
+            // Add keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && document.getElementById('mainContent').style.display !== 'none') {
+                    const sections = ['pengenalan', 'variabel', 'operator', 'percabangan', 'perulangan', 'array', 'struct', 'enum', 'fungsi', 'algoritma', 'proyek'];
+                    const currentSection = document.querySelector('.section.active')?.id;
+                    if (currentSection) {
+                        const currentIndex = sections.indexOf(currentSection);
+
+                        if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                            showSection(sections[currentIndex - 1]);
+                            e.preventDefault();
+                        } else if (e.key === 'ArrowRight' && currentIndex < sections.length - 1) {
+                            showSection(sections[currentIndex + 1]);
+                            e.preventDefault();
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
