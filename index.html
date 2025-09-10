@@ -19,6 +19,98 @@
             min-height: 100vh;
         }
 
+        /* Login Screen Styles */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .login-box h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+
+        .login-box p {
+            color: #7f8c8d;
+            margin-bottom: 25px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        .login-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .error-message {
+            background: #e74c3c;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .login-hint {
+            margin-top: 20px;
+            color: #95a5a6;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -294,11 +386,30 @@
             .content {
                 padding: 20px;
             }
+
+            .login-box {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <h2>Akses Modul Pemrograman C++</h2>
+            <p>Masukkan kode akses untuk melanjutkan pembelajaran</p>
+            <input type="password" id="accessCode" placeholder="Masukkan kode akses..." maxlength="20">
+            <button onclick="checkAccess()" class="login-btn">Masuk</button>
+            <div id="errorMessage" class="error-message">Kode akses tidak valid!</div>
+            <div class="login-hint">
+                <small>Hint: Kode terdiri dari 12 karakter (CPP + tahun + kata kunci)</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="container" style="display: none;">
         <header>
             <h1>Modul Pemrograman Dasar C++</h1>
             <p class="subtitle">Panduan Lengkap Belajar C++ dari Dasar hingga Mahir</p>
@@ -381,17 +492,13 @@
                 
                 <div class="example-box">
                     <h4>1. Linux (Ubuntu/Debian)</h4>
-                    <div class="code-block">
-sudo apt-get update
-sudo apt-get install g++
-                    </div>
+                    <div class="code-block">sudo apt-get update
+sudo apt-get install g++</div>
                 </div>
 
                 <div class="example-box">
                     <h4>2. MacOS dengan Homebrew</h4>
-                    <div class="code-block">
-brew install gcc
-                    </div>
+                    <div class="code-block">brew install gcc</div>
                 </div>
 
                 <div class="example-box">
@@ -401,21 +508,17 @@ brew install gcc
 
                 <div class="example-box">
                     <h4>4. Windows - MinGW dengan MSYS2</h4>
-                    <div class="code-block">
-pacman -Syu
-pacman -S mingw-w64-x86_64-toolchain
-                    </div>
+                    <div class="code-block">pacman -Syu
+pacman -S mingw-w64-x86_64-toolchain</div>
                 </div>
 
                 <h4>Program Hello World Pertama</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
     return 0;
-}
-                </div>
+}</div>
 
                 <div class="exercise-box">
                     <h4>Latihan Praktek</h4>
@@ -438,20 +541,16 @@ int main() {
                 </div>
 
                 <h4>Deklarasi Variabel</h4>
-                <div class="code-block">
-int angka;          // Deklarasi
-double pi;          // Deklarasi
-                </div>
+                <div class="code-block">int angka;          // Deklarasi
+double pi;          // Deklarasi</div>
 
                 <h4>Inisialisasi Variabel</h4>
-                <div class="code-block">
-int angka = 10;         // Inisialisasi saat deklarasi
+                <div class="code-block">int angka = 10;         // Inisialisasi saat deklarasi
 double pi = 3.14159;    // Inisialisasi saat deklarasi
 
 // Inisialisasi terpisah
 int x;
-x = 20;
-                </div>
+x = 20;</div>
 
                 <h3>2.2 Tipe Data Dasar</h3>
 
@@ -491,8 +590,7 @@ x = 20;
                 </div>
 
                 <h4>Contoh Penggunaan Variabel dan Tipe Data</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 
 int main() {
     // Tipe data berbagai jenis
@@ -510,7 +608,14 @@ int main() {
     std::cout << "Cuaca Cerah? " << std::boolalpha << isSunny << std::endl;
 
     return 0;
-}
+}</div>
+
+                <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Implementasikan berbagai tipe data dalam program</li>
+                        <li><strong>SOAL:</strong> Buatlah program yang mendeklarasikan dan menginisialisasi variabel dengan semua tipe data dasar</li>
+                    </ul>
                 </div>
             </section>
 
@@ -562,8 +667,7 @@ int main() {
                 </div>
 
                 <h4>Contoh Program Operator Aritmatika</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 using namespace std;
 
 int main() {
@@ -577,9 +681,7 @@ int main() {
     cout << "a % b = " << (a % b) << endl;  // Sisa bagi
 
     return 0;
-}
-
-                </div>
+}</div>
 
                 <h3>3.2 Operator Perbandingan dan Logika</h3>
 
@@ -602,31 +704,30 @@ int main() {
                             <td>a != b</td>
                         </tr>
                         <tr>
-                            <td><</td>
+                            <td>&lt;</td>
                             <td>Kurang dari</td>
-                            <td>a < b</td>
+                            <td>a &lt; b</td>
                         </tr>
                         <tr>
-                            <td>></td>
+                            <td>&gt;</td>
                             <td>Lebih besar dari</td>
-                            <td>a > b</td>
+                            <td>a &gt; b</td>
                         </tr>
                         <tr>
-                            <td><=</td>
+                            <td>&lt;=</td>
                             <td>Kurang dari atau sama dengan</td>
-                            <td>a <= b</td>
+                            <td>a &lt;= b</td>
                         </tr>
                         <tr>
-                            <td>>=</td>
+                            <td>&gt;=</td>
                             <td>Lebih besar atau sama dengan</td>
-                            <td>a >= b</td>
+                            <td>a &gt;= b</td>
                         </tr>
                     </table>
                 </div>
 
-                  <h4>Contoh Program Operator Perbandingan</h4>
-                <div class="code-block">
-#include <iostream>
+                <h4>Contoh Program Operator Perbandingan</h4>
+                <div class="code-block">#include <iostream>
 using namespace std;
 
 int main() {
@@ -641,8 +742,7 @@ int main() {
     cout << "a <= b : " << (a <= b) << endl;
 
     return 0;
-}
-                </div>
+}</div>
 
                 <h4>Operator Logika</h4>
                 <div class="table-responsive">
@@ -670,9 +770,8 @@ int main() {
                     </table>
                 </div>
 
-                 <h4>Contoh Program Operator Logika</h4>
-                <div class="code-block">
-#include <iostream>
+                <h4>Contoh Program Operator Logika</h4>
+                <div class="code-block">#include <iostream>
 using namespace std;
 
 int main() {
@@ -685,11 +784,10 @@ int main() {
     cout << "!y     : " << (!y) << endl;
 
     return 0;
-}
-</div>
+}</div>
+
                 <h4>Contoh Program Kalkulator Sederhana</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 
 int main() {
     double num1, num2;
@@ -713,14 +811,14 @@ int main() {
     std::cout << "Quotient: " << quotient << std::endl;
     
     return 0;
-}
-                </div>
+}</div>
 
                 <div class="exercise-box">
-                    <h4>Latihan</h4>
+                    <h4>Latihan Praktek</h4>
                     <ul>
                         <li>Buat program sederhana yang menggunakan operator-operator tersebut</li>
                         <li>Implementasikan operator logika dalam program kontrol aliran</li>
+                        <li><strong>SOAL:</strong> Buatlah program yang menentukan apakah sebuah bilangan adalah bilangan genap atau ganjil</li>
                     </ul>
                 </div>
             </section>
@@ -734,20 +832,16 @@ int main() {
                 <div class="highlight">
                     <p>Percabangan digunakan untuk membuat keputusan dalam program berdasarkan kondisi tertentu.</p>
                 </div>
-                 <h4>Struktur Dasar Percabangan IF-ELSE</h4>
-                <div class="code-block">
-if (kondisi) {
+
+                <h4>Struktur Dasar Percabangan IF-ELSE</h4>
+                <div class="code-block">if (kondisi) {
     // Kode yang dijalankan jika kondisi true
 } else {
     // Kode yang dijalankan jika kondisi false
-}
-                </div>
+}</div>
 
-
-
-                 <h4>Contoh Program Percabangan iF-ELSE</h4>
-                <div class="code-block">
-#include <iostream>
+                <h4>Contoh Program Percabangan IF-ELSE</h4>
+                <div class="code-block">#include <iostream>
 using namespace std;
 
 int main() {
@@ -762,11 +856,9 @@ int main() {
     }
 
     return 0;
-}
-                </div>
+}</div>
 
-
-                  <div class="exercise-box">
+                <div class="exercise-box">
                     <h4>Latihan Praktek</h4>
                     <ul>
                         <li>Implementasikan beberapa percabangan dalam program</li>
@@ -774,22 +866,17 @@ int main() {
                     </ul>
                 </div>
 
-
-
                 <h4>Struktur Dasar Percabangan IF-ELSE IF-ELSE</h4>
-                <div class="code-block">
-if (kondisi) {
-    // Kode yang dijalankan jika kondisi true
-} else if (kondisi_lain) {
-    // Kode yang dijalankan jika kondisi_lain true
+                <div class="code-block">if (kondisi1) {
+    // Kode yang dijalankan jika kondisi1 true
+} else if (kondisi2) {
+    // Kode yang dijalankan jika kondisi2 true
 } else {
     // Kode yang dijalankan jika semua kondisi false
-}
-                </div>
+}</div>
 
                 <h4>Contoh Program Percabangan IF-ELSE IF-ELSE</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 
 int main() {
     int num;
@@ -806,42 +893,34 @@ int main() {
     }
     
     return 0;
-}
-                </div>
+}</div>
 
-                   <div class="exercise-box">
+                <div class="exercise-box">
                     <h4>Latihan Praktek</h4>
                     <ul>
                         <li>Implementasikan beberapa percabangan dalam program</li>
-                        <li><strong>SOAL:</strong> Buat program untuk menentukan kategori umur.
-
-< 13 → Anak-anak
-
-13-17 → Remaja
-
-18-59 → Dewasa
-
-≥ 60 → Lansia</li>
+                        <li><strong>SOAL:</strong> Buat program untuk menentukan kategori umur:
+                        <br>< 13 → Anak-anak
+                        <br>13-17 → Remaja
+                        <br>18-59 → Dewasa
+                        <br>≥ 60 → Lansia</li>
                     </ul>
                 </div>
 
-                 <div class="exercise-box">
-                    <h4>Latihan Praktek</h4>
+                <div class="exercise-box">
+                    <h4>Latihan Praktek Grade</h4>
                     <ul>
-                        <li>Implementasikan beberapa percabangan dalam program</li>
                         <li>Buat program penilaian sederhana dengan menggunakan percabangan if-else</li>
                         <li><strong>SOAL:</strong> Buatlah program yang menentukan grade berdasarkan nilai (A: 90-100, B: 80-89, C: 70-79, D: 60-69, E: <60)</li>
                     </ul>
                 </div>
 
-
                 <h3>4.2 Switch Case</h3>
                 
                 <p>Switch case digunakan untuk percabangan multi-kondisi yang lebih efisien daripada if-else bertingkat.</p>
 
-                   <h4>Contoh Struktur Dasar Switch Case</h4>
-                <div class="code-block">
-switch (ekspresi) {
+                <h4>Struktur Dasar Switch Case</h4>
+                <div class="code-block">switch (ekspresi) {
     case nilai1:
         // kode yang dijalankan jika ekspresi == nilai1
         break;
@@ -851,12 +930,10 @@ switch (ekspresi) {
     ...
     default:
         // kode yang dijalankan jika tidak ada case yang cocok
-}
-                </div>
+}</div>
 
-
-                <div class="code-block">
-#include <iostream>
+                <h4>Contoh Switch Case Sederhana</h4>
+                <div class="code-block">#include <iostream>
 using namespace std;
 
 int main() {
@@ -880,13 +957,10 @@ int main() {
     }
     
     return 0;
-}
-                </div>
+}</div>
 
-                    <h4>Contoh Switch Case dengan percabangan IF-ELSE</h4>
-                   <div class="code-block">
-                    
-#include <iostream>
+                <h4>Contoh Switch Case dengan percabangan IF-ELSE</h4>
+                <div class="code-block">#include <iostream>
 using namespace std;
 
 int main() {
@@ -924,30 +998,20 @@ int main() {
     }
 
     return 0;
-}
+}</div>
 
-                </div>
-
-                 <div class="exercise-box">
+                <div class="exercise-box">
                     <h4>Latihan Praktek</h4>
                     <ul>
-                        <li>Implementasikan beberapa percabangan dalam program</li>
-                        <li>Buat program penilaian sederhana dengan menggunakan percabangan if-else</li>
+                        <li>Implementasikan switch case dalam program</li>
                         <li><strong>SOAL:</strong> Buatlah program dalam bahasa C++ yang menampilkan pilihan buah:
-
-Apel
-
-Jeruk
-
-Jika pengguna memilih Apel, minta input harga. Jika harga lebih dari 20.000, tampilkan "Apel mahal", selain itu tampilkan "Apel terjangkau".
-
-Jika pengguna memilih Jeruk, minta input harga. Jika harga lebih dari 15.000, tampilkan "Jeruk mahal", selain itu tampilkan "Jeruk terjangkau".
-
-Jika pengguna memilih selain 1 atau 2, tampilkan "Pilihan tidak valid".</li>
+                        <br>1. Apel
+                        <br>2. Jeruk
+                        <br>Jika pengguna memilih Apel, minta input harga. Jika harga lebih dari 20.000, tampilkan "Apel mahal", selain itu tampilkan "Apel terjangkau".
+                        <br>Jika pengguna memilih Jeruk, minta input harga. Jika harga lebih dari 15.000, tampilkan "Jeruk mahal", selain itu tampilkan "Jeruk terjangkau".
+                        <br>Jika pengguna memilih selain 1 atau 2, tampilkan "Pilihan tidak valid".</li>
                     </ul>
                 </div>
-
-               
             </section>
 
             <!-- Section 5: Perulangan -->
@@ -960,16 +1024,13 @@ Jika pengguna memilih selain 1 atau 2, tampilkan "Pilihan tidak valid".</li>
                     <p>For loop digunakan untuk iterasi dengan jumlah perulangan yang sudah diketahui.</p>
                 </div>
 
-                <div class="code-block">
-for (inisialisasi; kondisi; increment/decrement) {
+                <h4>Struktur For Loop</h4>
+                <div class="code-block">for (inisialisasi; kondisi; increment/decrement) {
     // Kode yang akan diulang
-}
-                </div>
+}</div>
 
-                <h4>Contoh For Loop</h4>
-                 <h4>Ascending → urutan naik (1, 2, 3, 4, 5)</h4>
-                <div class="code-block">
-#include <iostream>
+                <h4>Contoh For Loop Ascending (1, 2, 3, 4, 5)</h4>
+                <div class="code-block">#include <iostream>
 using namespace std;
 
 int main() {
@@ -980,12 +1041,10 @@ int main() {
     cout << endl;
 
     return 0;
-}
-                </div>
+}</div>
 
-                   <h4>Descending → urutan turun (5, 4, 3, 2, 1)</h4>
-                <div class="code-block">
-#include <iostream>
+                <h4>Contoh For Loop Descending (5, 4, 3, 2, 1)</h4>
+                <div class="code-block">#include <iostream>
 using namespace std;
 
 int main() {
@@ -996,12 +1055,10 @@ int main() {
     cout << endl;
 
     return 0;
-}
-                </div>
+}</div>
 
-                 <h4>latihan for loop dari 1 sampai 100 Ascending</h4>
-                <div class="code-block">
-#include <iostream>
+                <h4>Latihan For Loop dari 1 sampai 100 Ascending</h4>
+                <div class="code-block">#include <iostream>
 using namespace std;
 
 int main() {
@@ -1009,10 +1066,15 @@ int main() {
     cout << "Ascending (1 ke 100):" << endl;
     for (int i = 1; i <= 100; i++) {
         cout << i << " ";
+        // Untuk membuat output lebih rapi, baris baru setiap 10 angka
+        if (i % 10 == 0) {
+            cout << endl;
+        }
     }
-                </div>
+    return 0;
+}</div>
 
-                 <div class="exercise-box">
+                <div class="exercise-box">
                     <h4>Latihan Praktek</h4>
                     <ul>
                         <li>Buat program yang menggunakan berbagai jenis perulangan</li>
@@ -1023,8 +1085,7 @@ int main() {
                 <h3>5.2 While dan Do-While Loop</h3>
 
                 <h4>While Loop</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 using namespace std;
 
 int main() {
@@ -1036,13 +1097,10 @@ int main() {
     cout << endl;
 
     return 0;
-}
-
-                </div>
+}</div>
 
                 <h4>Do-While Loop</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 using namespace std;
 
 int main() {
@@ -1054,13 +1112,10 @@ int main() {
     cout << endl;
 
     return 0;
-}
-
-                </div>
+}</div>
 
                 <h4>Contoh Program Bintang</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 using namespace std;
 
 int main() {
@@ -1071,8 +1126,7 @@ int main() {
         cout << endl;
     }
     return 0;
-}
-                </div>
+}</div>
 
                 <div class="exercise-box">
                     <h4>Latihan Praktek</h4>
@@ -1094,36 +1148,31 @@ int main() {
                 </div>
 
                 <h4>Deklarasi dan Inisialisasi Array</h4>
-                <div class="code-block">
-// Deklarasi array
+                <div class="code-block">// Deklarasi array
 int numbers[5];
 
 // Inisialisasi saat deklarasi
 int numbers[5] = {1, 2, 3, 4, 5};
 
 // Inisialisasi sebagian
-int numbers[5] = {1, 2}; // sisanya akan diisi 0
-                </div>
+int numbers[5] = {1, 2}; // sisanya akan diisi 0</div>
 
                 <h4>Mengakses Elemen Array</h4>
-                <div class="code-block">
-int numbers[5] = {10, 20, 30, 40, 50};
+                <div class="code-block">int numbers[5] = {10, 20, 30, 40, 50};
 
 // Mengakses elemen (indeks dimulai dari 0)
 std::cout << numbers[0] << std::endl; // Output: 10
 std::cout << numbers[4] << std::endl; // Output: 50
 
 // Mengubah nilai elemen
-numbers[2] = 35;
-                </div>
+numbers[2] = 35;</div>
 
                 <h3>6.2 String</h3>
 
                 <p>String adalah kumpulan karakter yang digunakan untuk menyimpan teks.</p>
 
                 <h4>Deklarasi dan Inisialisasi String</h4>
-                <div class="code-block">
-#include <string>
+                <div class="code-block">#include <string>
 
 // Menggunakan std::string
 std::string greeting = "Hello, World!";
@@ -1131,12 +1180,10 @@ std::string name;
 name = "John Doe";
 
 // String kosong
-std::string empty = "";
-                </div>
+std::string empty = "";</div>
 
                 <h4>Operasi Dasar pada String</h4>
-                <div class="code-block">
-std::string firstName = "John";
+                <div class="code-block">std::string firstName = "John";
 std::string lastName = "Doe";
 
 // Concatenation (penggabungan)
@@ -1146,12 +1193,10 @@ std::string fullName = firstName + " " + lastName;
 int length = fullName.length();
 
 // Mengakses karakter
-char firstChar = fullName[0]; // 'J'
-                </div>
+char firstChar = fullName[0]; // 'J'</div>
 
                 <h4>Contoh Program Array dan String</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 #include <string>
 
 int main() {
@@ -1170,8 +1215,7 @@ int main() {
     std::cout << "Length: " << greeting.length() << std::endl;
     
     return 0;
-}
-                </div>
+}</div>
 
                 <div class="exercise-box">
                     <h4>Latihan Praktek</h4>
@@ -1194,17 +1238,14 @@ int main() {
                 </div>
 
                 <h4>Membuat Struktur Data Sederhana</h4>
-                <div class="code-block">
-struct Person {
+                <div class="code-block">struct Person {
     std::string name;
     int age;
     double height;
-};
-                </div>
+};</div>
 
                 <h4>Menggunakan Struktur</h4>
-                <div class="code-block">
-// Membuat variabel struct
+                <div class="code-block">// Membuat variabel struct
 Person person1;
 
 // Mengisi nilai anggota struktur
@@ -1213,12 +1254,10 @@ person1.age = 25;
 person1.height = 175.5;
 
 // Inisialisasi langsung
-Person person2 = {"Jane Smith", 30, 165.0};
-                </div>
+Person person2 = {"Jane Smith", 30, 165.0};</div>
 
                 <h4>Contoh Program Lengkap</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 #include <string>
 
 // Definisi struktur
@@ -1251,8 +1290,7 @@ int main() {
     }
     
     return 0;
-}
-                </div>
+}</div>
 
                 <div class="exercise-box">
                     <h4>Latihan Praktek</h4>
@@ -1275,8 +1313,7 @@ int main() {
                 </div>
 
                 <h4>Definisi Enum</h4>
-                <div class="code-block">
-// Enum untuk hari dalam seminggu
+                <div class="code-block">// Enum untuk hari dalam seminggu
 enum Days { 
     Sunday, Monday, Tuesday, Wednesday, 
     Thursday, Friday, Saturday 
@@ -1287,12 +1324,10 @@ enum Status {
     PENDING = 1, 
     PROCESSING = 2, 
     COMPLETED = 3 
-};
-                </div>
+};</div>
 
                 <h4>Menggunakan Enum</h4>
-                <div class="code-block">
-Days today = Wednesday;
+                <div class="code-block">Days today = Wednesday;
 Status orderStatus = PENDING;
 
 // Menggunakan dalam switch case
@@ -1309,12 +1344,10 @@ switch (today) {
         break;
     default:
         std::cout << "Regular day" << std::endl;
-}
-                </div>
+}</div>
 
                 <h4>Contoh Program Klasifikasi Hari</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 
 enum Days { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
 
@@ -1346,8 +1379,7 @@ int main() {
     }
     
     return 0;
-}
-                </div>
+}</div>
 
                 <div class="exercise-box">
                     <h4>Latihan Praktek</h4>
@@ -1370,8 +1402,7 @@ int main() {
                 </div>
 
                 <h4>Definisi Fungsi</h4>
-                <div class="code-block">
-// Fungsi dengan parameter dan nilai kembalian
+                <div class="code-block">// Fungsi dengan parameter dan nilai kembalian
 int add(int a, int b) {
     return a + b;
 }
@@ -1384,14 +1415,12 @@ int getRandomNumber() {
 // Fungsi dengan multiple parameter
 double calculateArea(double length, double width) {
     return length * width;
-}
-                </div>
+}</div>
 
                 <h3>9.2 Prosedur</h3>
 
                 <h4>Definisi Prosedur (Void Function)</h4>
-                <div class="code-block">
-// Prosedur tanpa nilai kembalian
+                <div class="code-block">// Prosedur tanpa nilai kembalian
 void greet(std::string name) {
     std::cout << "Hello, " << name << "!" << std::endl;
 }
@@ -1402,12 +1431,10 @@ void printMenu() {
     std::cout << "1. Option 1" << std::endl;
     std::cout << "2. Option 2" << std::endl;
     std::cout << "3. Exit" << std::endl;
-}
-                </div>
+}</div>
 
                 <h4>Contoh Program Lengkap</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 #include <cmath>
 
 // Fungsi untuk menghitung luas lingkaran
@@ -1442,8 +1469,7 @@ int main() {
     displayResults(radius, area, perimeter);
     
     return 0;
-}
-                </div>
+}</div>
 
                 <div class="exercise-box">
                     <h4>Latihan Praktek</h4>
@@ -1466,8 +1492,7 @@ int main() {
                     <p>Bubble Sort membandingkan elemen yang berdekatan dan menukar posisinya jika elemen pertama lebih besar dari elemen kedua.</p>
                 </div>
 
-                <div class="code-block">
-void bubbleSort(int arr[], int n) {
+                <div class="code-block">void bubbleSort(int arr[], int n) {
     for (int i = 0; i < n-1; i++) {
         for (int j = 0; j < n-i-1; j++) {
             if (arr[j] > arr[j+1]) {
@@ -1478,12 +1503,10 @@ void bubbleSort(int arr[], int n) {
             }
         }
     }
-}
-                </div>
+}</div>
 
                 <h4>2. Selection Sort</h4>
-                <div class="code-block">
-void selectionSort(int arr[], int n) {
+                <div class="code-block">void selectionSort(int arr[], int n) {
     for (int i = 0; i < n-1; i++) {
         int minIdx = i;
         for (int j = i+1; j < n; j++) {
@@ -1496,12 +1519,10 @@ void selectionSort(int arr[], int n) {
         arr[minIdx] = arr[i];
         arr[i] = temp;
     }
-}
-                </div>
+}</div>
 
                 <h4>3. Insertion Sort</h4>
-                <div class="code-block">
-void insertionSort(int arr[], int n) {
+                <div class="code-block">void insertionSort(int arr[], int n) {
     for (int i = 1; i < n; i++) {
         int key = arr[i];
         int j = i - 1;
@@ -1512,8 +1533,7 @@ void insertionSort(int arr[], int n) {
         }
         arr[j + 1] = key;
     }
-}
-                </div>
+}</div>
 
                 <h3>10.2 Algoritma Searching</h3>
 
@@ -1522,24 +1542,21 @@ void insertionSort(int arr[], int n) {
                     <p>Linear Search memeriksa setiap elemen dalam array secara berurutan hingga menemukan elemen yang dicari.</p>
                 </div>
 
-                <div class="code-block">
-int linearSearch(int arr[], int n, int target) {
+                <div class="code-block">int linearSearch(int arr[], int n, int target) {
     for (int i = 0; i < n; i++) {
         if (arr[i] == target) {
             return i; // Return index if found
         }
     }
     return -1; // Return -1 if not found
-}
-                </div>
+}</div>
 
                 <h4>2. Binary Search</h4>
                 <div class="highlight">
                     <p>Binary Search bekerja pada array yang sudah terurut dengan membagi array menjadi dua bagian secara berulang.</p>
                 </div>
 
-                <div class="code-block">
-int binarySearch(int arr[], int low, int high, int target) {
+                <div class="code-block">int binarySearch(int arr[], int low, int high, int target) {
     while (low <= high) {
         int mid = low + (high - low) / 2;
         
@@ -1551,12 +1568,10 @@ int binarySearch(int arr[], int low, int high, int target) {
             high = mid - 1;
     }
     return -1; // Element not found
-}
-                </div>
+}</div>
 
                 <h4>Contoh Program Lengkap</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 
 // Bubble Sort implementation
 void bubbleSort(int arr[], int n) {
@@ -1618,8 +1633,7 @@ int main() {
     }
     
     return 0;
-}
-                </div>
+}</div>
 
                 <div class="exercise-box">
                     <h4>Latihan Praktek</h4>
@@ -1674,8 +1688,7 @@ int main() {
                 </div>
 
                 <h4>Template Struktur Program</h4>
-                <div class="code-block">
-#include <iostream>
+                <div class="code-block">#include <iostream>
 #include <string>
 #include <vector>
 
@@ -1705,6 +1718,20 @@ public:
     int findItemByCode(const std::string& code);
 };
 
+// Implementation of showMenu
+void InventoryManager::showMenu() {
+    std::cout << "\n=== SISTEM PENGELOLAAN INVENTARIS ===" << std::endl;
+    std::cout << "1. Tambah Data Inventaris" << std::endl;
+    std::cout << "2. Hapus Data Inventaris" << std::endl;
+    std::cout << "3. Ubah Data Inventaris" << std::endl;
+    std::cout << "4. Tampilkan Data Inventaris" << std::endl;
+    std::cout << "5. Cari Data Inventaris" << std::endl;
+    std::cout << "6. Urutkan Data" << std::endl;
+    std::cout << "7. Cetak Laporan" << std::endl;
+    std::cout << "0. Keluar" << std::endl;
+    std::cout << "====================================" << std::endl;
+}
+
 int main() {
     InventoryManager manager;
     int choice;
@@ -1728,8 +1755,7 @@ int main() {
     } while (choice != 0);
     
     return 0;
-}
-                </div>
+}</div>
 
                 <div class="exercise-box">
                     <h4>Petunjuk Pengerjaan:</h4>
@@ -1750,6 +1776,41 @@ int main() {
                         <li><strong>Algoritma (25%):</strong> Implementasi sorting dan searching</li>
                         <li><strong>Struktur Code (20%):</strong> Penggunaan struct, function, dan class</li>
                         <li><strong>User Interface (15%):</strong> Menu dan tampilan yang mudah digunakan</li>
+                    </ul>
+                </div>
+
+                <h4>Contoh Implementasi Method AddItem</h4>
+                <div class="code-block">void InventoryManager::addItem() {
+    Inventory newItem;
+    
+    std::cout << "\n=== TAMBAH DATA INVENTARIS ===" << std::endl;
+    std::cout << "Masukkan kode inventaris: ";
+    std::cin >> newItem.code;
+    
+    std::cout << "Masukkan nama inventaris: ";
+    std::cin.ignore();
+    std::getline(std::cin, newItem.name);
+    
+    std::cout << "Masukkan jumlah: ";
+    std::cin >> newItem.quantity;
+    
+    std::cout << "Masukkan satuan: ";
+    std::cin >> newItem.unit;
+    
+    std::cout << "Masukkan harga: ";
+    std::cin >> newItem.price;
+    
+    items.push_back(newItem);
+    std::cout << "Data berhasil ditambahkan!" << std::endl;
+}</div>
+
+                <div class="exercise-box">
+                    <h4>Tugas Tambahan (Opsional):</h4>
+                    <ul>
+                        <li>Implementasikan save/load data dari file</li>
+                        <li>Tambahkan fitur backup data</li>
+                        <li>Buat laporan dalam format yang lebih menarik</li>
+                        <li>Implementasikan multiple sorting criteria</li>
                     </ul>
                 </div>
             </section>
@@ -1847,9 +1908,6 @@ int main() {
             // Selalu tampilkan login screen terlebih dahulu
             document.getElementById('loginScreen').style.display = 'flex';
             document.getElementById('mainContent').style.display = 'none';
-            
-            // Hapus session lama (opsional - untuk memastikan selalu login)
-            // sessionStorage.removeItem('isAuthenticated');
             
             // Focus pada input kode
             setTimeout(() => {
