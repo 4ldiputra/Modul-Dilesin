@@ -561,6 +561,26 @@ int main() {
                     </table>
                 </div>
 
+                <h4>Contoh Program Operator Aritmatika</h4>
+                <div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 12, b = 5;
+
+    cout << "=== Operator Aritmatika ===" << endl;
+    cout << "a + b = " << (a + b) << endl;  // Penjumlahan
+    cout << "a - b = " << (a - b) << endl;  // Pengurangan
+    cout << "a * b = " << (a * b) << endl;  // Perkalian
+    cout << "a / b = " << (a / b) << endl;  // Pembagian (integer)
+    cout << "a % b = " << (a % b) << endl;  // Sisa bagi
+
+    return 0;
+}
+
+                </div>
+
                 <h3>3.2 Operator Perbandingan dan Logika</h3>
 
                 <h4>Operator Perbandingan</h4>
@@ -604,6 +624,26 @@ int main() {
                     </table>
                 </div>
 
+                  <h4>Contoh Program Operator Perbandingan</h4>
+                <div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 8, b = 10;
+
+    cout << "=== Operator Perbandingan ===" << endl;
+    cout << "a == b : " << (a == b) << endl;
+    cout << "a != b : " << (a != b) << endl;
+    cout << "a > b  : " << (a > b) << endl;
+    cout << "a < b  : " << (a < b) << endl;
+    cout << "a >= b : " << (a >= b) << endl;
+    cout << "a <= b : " << (a <= b) << endl;
+
+    return 0;
+}
+                </div>
+
                 <h4>Operator Logika</h4>
                 <div class="table-responsive">
                     <table>
@@ -630,6 +670,23 @@ int main() {
                     </table>
                 </div>
 
+                 <h4>Contoh Program Operator Logika</h4>
+                <div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    bool x = true, y = false;
+
+    cout << "=== Operator Logika ===" << endl;
+    cout << "x && y : " << (x && y) << endl; // AND
+    cout << "x || y : " << (x || y) << endl; // OR
+    cout << "!x     : " << (!x) << endl;     // NOT
+    cout << "!y     : " << (!y) << endl;
+
+    return 0;
+}
+</div>
                 <h4>Contoh Program Kalkulator Sederhana</h4>
                 <div class="code-block">
 #include <iostream>
@@ -677,8 +734,49 @@ int main() {
                 <div class="highlight">
                     <p>Percabangan digunakan untuk membuat keputusan dalam program berdasarkan kondisi tertentu.</p>
                 </div>
+                 <h4>Struktur Dasar Percabangan IF-ELSE</h4>
+                <div class="code-block">
+if (kondisi) {
+    // Kode yang dijalankan jika kondisi true
+} else {
+    // Kode yang dijalankan jika kondisi false
+}
+                </div>
 
-                <h4>Struktur Dasar Percabangan</h4>
+
+
+                 <h4>Contoh Program Percabangan iF-ELSE</h4>
+                <div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    int angka;
+    cout << "Masukkan sebuah angka: ";
+    cin >> angka;
+
+    if (angka % 2 == 0) {
+        cout << "Angka genap" << endl;
+    } else {
+        cout << "Angka ganjil" << endl;
+    }
+
+    return 0;
+}
+                </div>
+
+
+                  <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Implementasikan beberapa percabangan dalam program</li>
+                        <li><strong>SOAL:</strong> Buatlah program dalam bahasa C++ yang meminta pengguna memasukkan sebuah bilangan bulat. Program harus menentukan apakah bilangan tersebut positif atau negatif, kemudian menampilkan hasilnya ke layar.</li>
+                    </ul>
+                </div>
+
+
+
+                <h4>Struktur Dasar Percabangan IF-ELSE IF-ELSE</h4>
                 <div class="code-block">
 if (kondisi) {
     // Kode yang dijalankan jika kondisi true
@@ -689,7 +787,7 @@ if (kondisi) {
 }
                 </div>
 
-                <h4>Contoh Program Percabangan</h4>
+                <h4>Contoh Program Percabangan IF-ELSE IF-ELSE</h4>
                 <div class="code-block">
 #include <iostream>
 
@@ -711,38 +809,23 @@ int main() {
 }
                 </div>
 
-                <h3>4.2 Switch Case</h3>
-                
-                <p>Switch case digunakan untuk percabangan multi-kondisi yang lebih efisien daripada if-else bertingkat.</p>
+                   <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Implementasikan beberapa percabangan dalam program</li>
+                        <li><strong>SOAL:</strong> Buat program untuk menentukan kategori umur.
 
-                <div class="code-block">
-#include <iostream>
+< 13 → Anak-anak
 
-int main() {
-    int pilihan;
-    
-    std::cout << "Pilih menu (1-3): ";
-    std::cin >> pilihan;
-    
-    switch (pilihan) {
-        case 1:
-            std::cout << "Anda memilih menu 1" << std::endl;
-            break;
-        case 2:
-            std::cout << "Anda memilih menu 2" << std::endl;
-            break;
-        case 3:
-            std::cout << "Anda memilih menu 3" << std::endl;
-            break;
-        default:
-            std::cout << "Pilihan tidak valid" << std::endl;
-    }
-    
-    return 0;
-}
+13-17 → Remaja
+
+18-59 → Dewasa
+
+≥ 60 → Lansia</li>
+                    </ul>
                 </div>
 
-                <div class="exercise-box">
+                 <div class="exercise-box">
                     <h4>Latihan Praktek</h4>
                     <ul>
                         <li>Implementasikan beberapa percabangan dalam program</li>
@@ -750,6 +833,121 @@ int main() {
                         <li><strong>SOAL:</strong> Buatlah program yang menentukan grade berdasarkan nilai (A: 90-100, B: 80-89, C: 70-79, D: 60-69, E: <60)</li>
                     </ul>
                 </div>
+
+
+                <h3>4.2 Switch Case</h3>
+                
+                <p>Switch case digunakan untuk percabangan multi-kondisi yang lebih efisien daripada if-else bertingkat.</p>
+
+                   <h4>Contoh Struktur Dasar Switch Case</h4>
+                <div class="code-block">
+switch (ekspresi) {
+    case nilai1:
+        // kode yang dijalankan jika ekspresi == nilai1
+        break;
+    case nilai2:
+        // kode yang dijalankan jika ekspresi == nilai2
+        break;
+    ...
+    default:
+        // kode yang dijalankan jika tidak ada case yang cocok
+}
+                </div>
+
+
+                <div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    int pilihan;
+    
+    cout << "Pilih menu (1-3): ";
+    cin >> pilihan;
+    
+    switch (pilihan) {
+        case 1:
+            cout << "Anda memilih menu 1" << endl;
+            break;
+        case 2:
+            cout << "Anda memilih menu 2" << endl;
+            break;
+        case 3:
+            cout << "Anda memilih menu 3" << endl;
+            break;
+        default:
+            cout << "Pilihan tidak valid" << endl;
+    }
+    
+    return 0;
+}
+                </div>
+
+                    <h4>Contoh Switch Case dengan percabangan IF-ELSE</h4>
+                   <div class="code-block">
+                    
+#include <iostream>
+using namespace std;
+
+int main() {
+    int menu;
+    int nilai;
+
+    cout << "Pilih mata pelajaran (1=Matematika, 2=Bahasa): ";
+    cin >> menu;
+
+    switch (menu) {
+        case 1:
+            cout << "Masukkan nilai Matematika: ";
+            cin >> nilai;
+
+            if (nilai >= 75) {
+                cout << "Lulus Matematika" << endl;
+            } else {
+                cout << "Tidak lulus Matematika" << endl;
+            }
+            break;
+
+        case 2:
+            cout << "Masukkan nilai Bahasa: ";
+            cin >> nilai;
+
+            if (nilai >= 70) {
+                cout << "Lulus Bahasa" << endl;
+            } else {
+                cout << "Tidak lulus Bahasa" << endl;
+            }
+            break;
+
+        default:
+            cout << "Pilihan tidak valid" << endl;
+    }
+
+    return 0;
+}
+
+                </div>
+
+                 <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Implementasikan beberapa percabangan dalam program</li>
+                        <li>Buat program penilaian sederhana dengan menggunakan percabangan if-else</li>
+                        <li><strong>SOAL:</strong> Buatlah program dalam bahasa C++ yang menampilkan pilihan buah:
+
+Apel
+
+Jeruk
+
+Jika pengguna memilih Apel, minta input harga. Jika harga lebih dari 20.000, tampilkan "Apel mahal", selain itu tampilkan "Apel terjangkau".
+
+Jika pengguna memilih Jeruk, minta input harga. Jika harga lebih dari 15.000, tampilkan "Jeruk mahal", selain itu tampilkan "Jeruk terjangkau".
+
+Jika pengguna memilih selain 1 atau 2, tampilkan "Pilihan tidak valid".</li>
+                    </ul>
+                </div>
+
+               
             </section>
 
             <!-- Section 5: Perulangan -->
@@ -769,64 +967,109 @@ for (inisialisasi; kondisi; increment/decrement) {
                 </div>
 
                 <h4>Contoh For Loop</h4>
+                 <h4>Ascending → urutan naik (1, 2, 3, 4, 5)</h4>
                 <div class="code-block">
-// Mencetak angka 1-5
-for (int i = 1; i <= 5; ++i) {
-    std::cout << i << " ";
+#include <iostream>
+using namespace std;
+
+int main() {
+    // Mencetak angka 1-5
+    for (int i = 1; i <= 5; ++i) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    return 0;
 }
-std::cout << std::endl;
+                </div>
+
+                   <h4>Descending → urutan turun (5, 4, 3, 2, 1)</h4>
+                <div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    // Mencetak angka 5-1
+    for (int i = 5; i >= 1; --i) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+                </div>
+
+                 <h4>latihan for loop dari 1 sampai 100 Ascending</h4>
+                <div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    // Ascending (1 sampai 100)
+    cout << "Ascending (1 ke 100):" << endl;
+    for (int i = 1; i <= 100; i++) {
+        cout << i << " ";
+    }
+                </div>
+
+                 <div class="exercise-box">
+                    <h4>Latihan Praktek</h4>
+                    <ul>
+                        <li>Buat program yang menggunakan berbagai jenis perulangan</li>
+                        <li><strong>SOAL:</strong> Buatlah program Descending (100 ke 1)</li>
+                    </ul>
                 </div>
 
                 <h3>5.2 While dan Do-While Loop</h3>
 
                 <h4>While Loop</h4>
                 <div class="code-block">
-int j = 1;
-while (j <= 5) {
-    std::cout << j << " ";
-    ++j;
+#include <iostream>
+using namespace std;
+
+int main() {
+    int j = 1;
+    while (j <= 5) {
+        cout << j << " ";
+        ++j;
+    }
+    cout << endl;
+
+    return 0;
 }
+
                 </div>
 
                 <h4>Do-While Loop</h4>
                 <div class="code-block">
-int k = 1;
-do {
-    std::cout << k << " ";
-    ++k;
-} while (k <= 5);
-                </div>
-
-                <h4>Contoh Program Lengkap</h4>
-                <div class="code-block">
 #include <iostream>
+using namespace std;
 
 int main() {
-    // For Loop
-    std::cout << "For Loop: ";
-    for (int i = 1; i <= 5; ++i) {
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
-
-    // While Loop
-    std::cout << "While Loop: ";
-    int j = 1;
-    while (j <= 5) {
-        std::cout << j << " ";
-        ++j;
-    }
-    std::cout << std::endl;
-
-    // Do-While Loop
-    std::cout << "Do-While Loop: ";
     int k = 1;
     do {
-        std::cout << k << " ";
+        cout << k << " ";
         ++k;
     } while (k <= 5);
-    std::cout << std::endl;
+    cout << endl;
 
+    return 0;
+}
+
+                </div>
+
+                <h4>Contoh Program Bintang</h4>
+                <div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    for (int i = 1; i <= 5; i++) {
+        for (int j = 1; j <= i; j++) {
+            cout << "* ";
+        }
+        cout << endl;
+    }
     return 0;
 }
                 </div>
@@ -835,7 +1078,6 @@ int main() {
                     <h4>Latihan Praktek</h4>
                     <ul>
                         <li>Buat program yang menggunakan berbagai jenis perulangan</li>
-                        <li>Implementasikan perulangan untuk membuat pola bintang sederhana</li>
                         <li><strong>SOAL:</strong> Buatlah program yang meminta pengguna memasukkan bilangan bulat positif N, lalu tampilkan semua bilangan ganjil dari 1 hingga N</li>
                     </ul>
                 </div>
