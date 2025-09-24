@@ -1161,6 +1161,58 @@ int main() {
     return 0;
 }</div>
 
+                <h4>contoh penggunaan do-while dengan switch-case</h4>
+                <div class="code-block">
+#include <iostream#include <iostream>
+using namespace std;
+
+int main() {
+    int pilihan;
+
+    do {
+        // Menampilkan menu
+        cout << "=== Menu Sederhana ===" << endl;
+        cout << "1. Cetak Hello" << endl;
+        cout << "2. Cetak Dunia" << endl;
+        cout << "3. Keluar" << endl;
+        cout << "Masukkan pilihan: ";
+        cin >> pilihan;
+
+        // Switch-case untuk mengeksekusi pilihan
+        switch (pilihan) {
+            case 1:
+                cout << "Hello!" << endl;
+                break;
+            case 2:
+                cout << "Dunia!" << endl;
+                break;
+            case 3:
+                cout << "Keluar dari program." << endl;
+                break;
+            default:
+                cout << "Pilihan tidak valid!" << endl;
+        }
+
+        cout << endl; // Tambahkan baris kosong untuk rapi
+
+    } while (pilihan != 3); // Ulangi selama pilihan bukan 3
+
+    return 0;
+}
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <h4>Contoh Program Bintang</h4>
                 <div class="code-block">#include <iostream>
 using namespace std;
@@ -1242,65 +1294,238 @@ std::cout << numbers[4] << std::endl; // Output: 50
 // Mengubah nilai elemen
 numbers[2] = 35;</div>
 
+<h4>Pemanggilan Array dengan Perulangan</h4>
+<div class="code-block">int numbers[5] = {10, 20, 30, 40, 50};
+
+for (int i = 0; i < 5; i++) {
+    std::cout << numbers[i] << " ";
+}
+// Output: 10 20 30 40 50
+</div>
+
+
+<h4>Input dari User ke Array</h4>
+<div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    int data[5];
+    for (int i = 0; i < 5; i++) {
+        cout << "Masukkan elemen ke-" << i << ": ";
+        cin >> data[i];
+    }
+
+    cout << "Isi array: ";
+    for (int i = 0; i < 5; i++) {
+        cout << data[i] << " ";
+    }
+
+    return 0;
+}
+</div>
+
+<h4>Menghitung Jumlah Elemen dengan sizeof</h4>
+<div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    int numbers[5] = {10, 20, 30, 40, 50};
+    int panjang = sizeof(numbers) / sizeof(numbers[0]);
+
+    cout << "Jumlah elemen array = " << panjang << endl;
+
+    return 0;
+}
+</div>
+
+<h4>Menghitung Jumlah Elemen dengan sizeof</h4>
+<div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    int numbers[5] = {7, 2, 9, 4, 6};
+    int maks = numbers[0];
+
+    for (int i = 1; i < 5; i++) {
+        if (numbers[i] > maks) {
+            maks = numbers[i];
+        }
+    }
+
+    cout << "Nilai terbesar = " << maks << endl;
+
+    return 0;
+}
+</div>
+
+<div class="exercise-box">
+    <h4>Latihan Praktek</h4>
+    <ul>
+        <li><strong>SOAL 1:</strong> Seorang guru ingin menyimpan nilai ujian 5 siswa di dalam array, lalu mencari:
+            <ul>
+                <li>Nilai tertinggi.</li>
+                <li>Nilai terendah.</li>
+                <li>Rata-rata nilai siswa.</li>
+            </ul>
+            Buat program dengan input nilai dari user dan tampilkan hasilnya.
+        </li>
+    </ul>
+</div>
+
+
+
+<h4>Contoh Program</h4>
+<div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    int nilai[5];
+    int maks, min, total = 0;
+    float rata;
+
+    // Input nilai siswa
+    for (int i = 0; i < 5; i++) {
+        cout << "Masukkan nilai siswa ke-" << (i + 1) << ": ";
+        cin >> nilai[i];
+    }
+
+    // Asumsikan nilai awal sebagai acuan
+    maks = nilai[0];
+    min = nilai[0];
+
+    // Proses mencari maks, min, dan total
+    for (int i = 0; i < 5; i++) {
+        if (nilai[i] > maks) {
+            maks = nilai[i];
+        }
+        if (nilai[i] < min) {
+            min = nilai[i];
+        }
+        total += nilai[i];
+    }
+
+    // Hitung rata-rata
+    rata = (float) total / 5;
+
+    // Tampilkan hasil
+    cout << "\nNilai tertinggi = " << maks << endl;
+    cout << "Nilai terendah  = " << min << endl;
+    cout << "Rata-rata nilai = " << rata << endl;
+
+    return 0;
+}
+</div>
+
+
+
+
+
+<div class="exercise-box">
+    <h4>Latihan Praktek</h4>
+    <ul>
+        <li><strong>SOAL 2:</strong> Skor Permainan
+            <ul>
+                <li>Ada 10 skor permainan yang disimpan dalam array: {85, 70, 90, 95, 60, 88, 76, 92, 100, 67}.</li>
+                <li>Menampilkan semua skor.</li>
+                <li>Mencari skor terbesar dan terkecil.</li>
+                <li>Menghitung rata-rata skor.</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="exercise-box">
+    <h4>Latihan Praktek</h4>
+    <ul>
+        <li><strong>SOAL 3:</strong> Suhu Harian
+            <ul>
+                <li>Catat suhu harian selama 7 hari ke dalam array.</li>
+                <li>Program harus bisa menampilkan suhu tertinggi dalam seminggu.</li>
+                <li>Menampilkan suhu terendah dalam seminggu.</li>
+                <li>Menampilkan rata-rata suhu dalam seminggu.</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="exercise-box">
+    <h4>Latihan Praktek</h4>
+    <ul>
+        <li><strong>SOAL 4:</strong> Bilangan Genap dan Ganjil
+            <ul>
+                <li>Diberikan array berisi 10 bilangan.</li>
+                <li>Memisahkan bilangan genap dan ganjil.</li>
+                <li>Menampilkan jumlah bilangan genap dan jumlah bilangan ganjil.</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <h3>6.2 String</h3>
 
                 <p>String adalah kumpulan karakter yang digunakan untuk menyimpan teks.</p>
 
-                <h4>Deklarasi dan Inisialisasi String</h4>
-                <div class="code-block">#include <string>
-
-// Menggunakan std::string
-std::string greeting = "Hello, World!";
-std::string name;
-name = "John Doe";
-
-// String kosong
-std::string empty = "";</div>
-
-                <h4>Operasi Dasar pada String</h4>
-                <div class="code-block">std::string firstName = "John";
-std::string lastName = "Doe";
-
-// Concatenation (penggabungan)
-std::string fullName = firstName + " " + lastName;
-
-// Panjang string
-int length = fullName.length();
-
-// Mengakses karakter
-char firstChar = fullName[0]; // 'J'</div>
-
-                <h4>Contoh Program Array dan String</h4>
+            
+                <h4>Program C++ Menghitung Panjang String</h4>
                 <div class="code-block">#include <iostream>
+#include <iostream>
 #include <string>
 
+using namespace std;
+
 int main() {
-    // Array
-    int numbers[5] = {1, 2, 3, 4, 5};
-    
-    std::cout << "Array elements: ";
-    for (int i = 0; i < 5; ++i) {
-        std::cout << numbers[i] << " ";
-    }
-    std::cout << std::endl;
-    
-    // String
-    std::string greeting = "Hello, World!";
-    std::cout << "String: " << greeting << std::endl;
-    std::cout << "Length: " << greeting.length() << std::endl;
-    
+    // Deklarasi variabel
+    string kalimat;
+
+    cout << "Program C++ Menghitung Panjang String" << endl;
+    cout << "-------------------------------------" << endl;
+    cout << endl;
+
+    // Input string
+    cout << "Masukkan String: ";
+    getline(cin, kalimat);
+
+    // Output panjang string
+    cout << "Panjang string adalah: " << kalimat.length() << endl;
+
     return 0;
-}</div>
+}
+
+</div>
 
                 <div class="exercise-box">
-                    <h4>Latihan Praktek</h4>
-                    <ul>
-                        <li>Buat program yang menggunakan array dan string</li>
-                        <li>Implementasikan program untuk mencari nilai maksimum dalam array</li>
-                        <li><strong>SOAL:</strong> Buatlah program yang mengambil 5 nilai integer dari pengguna, menyimpannya dalam array, dan kemudian menampilkan nilai maksimum dari array tersebut</li>
-                    </ul>
-                </div>
+    <h4>Latihan Praktek 2</h4>
+    <ul>
+        <li><strong>Topik:</strong> String</li>
+        <li><strong>Tujuan:</strong> Menghitung panjang string</li>
+        <li><strong>Soal:</strong> Budi ingin mengetahui berapa banyak karakter dalam pesan yang ia tulis untuk sahabatnya. Buatlah program C++ yang meminta Budi untuk memasukkan pesannya, kemudian menampilkan panjang pesan tersebut (jumlah karakter termasuk spasi).</li>
+    </ul>
+</div>
             </section>
+
+
+
+            
 
             <!-- Section 7: Struktur (Struct) -->
             <section id="struct" class="section">
